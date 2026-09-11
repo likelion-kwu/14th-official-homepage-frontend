@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { getMagazine } from '../api/magazineApi'
@@ -9,6 +9,7 @@ import cardOt from '../assets/activities/활동소개아이콘1.webp'
 import cardProject from '../assets/activities/활동소개아이콘2.webp'
 import cardHackathon from '../assets/activities/활통소개아이콘3.webp'
 import cardIdeathon from '../assets/activities/활동소개아이콘4.webp'
+import hackathonReviewBanner from '../assets/activities/hackathon-review-banner.webp'
 import { loadFonts } from '../utils/fonts'
 import { toRows } from '../utils/magazineBlocks'
 import { renderInline, renderMarkdown } from '../utils/markdown'
@@ -144,6 +145,25 @@ export default function Activities() {
           {!magazine && <div className='py-12 text-center text-white/65'>등록된 매거진이 없습니다.</div>}
           {magazine && <MagazineContent magazine={magazine} />}
         </section>
+        <Link
+          to='/activities/14th-hackathon'
+          aria-label='14기 중앙해커톤 회고 다시 보기'
+          className='group relative mt-4 block overflow-hidden rounded-[20px] border border-white/20 transition md:hover:border-orange-300 md:hover:shadow-[0_0_24px_rgba(255,153,102,0.3)]'
+        >
+          <img
+            src={hackathonReviewBanner}
+            alt='AFTER HACK — 끝난 줄 알았지? 우리의 다음은 지금부터. 14기 중앙해커톤 회고'
+            width={2555}
+            height={1262}
+            loading='lazy'
+            decoding='async'
+            className='block w-full transition duration-500 md:group-hover:scale-[1.02]'
+          />
+          <div className='pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-0 transition md:group-hover:opacity-100' />
+          <span className='absolute bottom-4 right-4 inline-flex items-center gap-1 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#111315] opacity-0 transition md:bottom-6 md:right-7 md:text-sm md:group-hover:opacity-100'>
+            회고 다시 보기 →
+          </span>
+        </Link>
       </section>
     </main>
     <div className='relative z-20 w-full px-4 pb-3'><Footer /></div>
