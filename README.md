@@ -78,7 +78,15 @@
 | `/curriculum/:track` | 파트별 커리큘럼. `track`은 `design`/`frontend`/`backend` | `src/pages/Curriculum.jsx` |
 | `/projects` | 역대 프로젝트 목록 + 상세 모달 | `src/pages/Projects.jsx` |
 | `/projectshome` | 옛 주소. `/projects`로 리다이렉트만 남김 | `src/App.jsx` |
+| `/activities/14th-hackathon` | AFTER HACK — 14기 중앙해커톤 회고 온보딩 | `src/pages/afterhack/Onboarding.jsx` |
+| `/activities/14th-hackathon/write` | 회고 답변 작성(질문 선택 카드) | `src/pages/afterhack/Write.jsx` |
+| `/activities/14th-hackathon/board/:qid` | 회고 칠판. `qid`는 1~4, 그 외는 `board/1`로 리다이렉트 | `src/pages/afterhack/Board.jsx` |
 | 그 외 전부 | `/`로 리다이렉트 | `src/App.jsx` |
+
+AFTER HACK 세 화면은 원래 `kwu-likelion-hack-review`라는 별도 Next.js
+저장소/Vercel 프로젝트였다가 이 저장소로 이주해 온 것입니다(2026-09).
+디렉터리와 스타일 스코핑 방식이 나머지 화면과 다른 이유는 6.1/9.10을
+보세요.
 
 `:track`에 이상한 값이 들어오면 404를 내지 않고 `frontend`로 떨어집니다
 (`Curriculum.jsx`의 `safeTrack`).
@@ -497,7 +505,10 @@ ESLint는 `pnpm lint`. 규칙은 기본 recommended + react-hooks + react-refres
 │   │   └── request.js         메서드 검사, 암호 검사, 본문 읽기, JSON 응답
 │   ├── register-project.js    POST   프로젝트 등록
 │   ├── register-magazine.js   PUT    매거진 저장 / DELETE 삭제
-│   └── upload-image.js        POST   이미지 업로드 (multipart 직접 파싱)
+│   ├── upload-image.js        POST   이미지 업로드 (multipart 직접 파싱)
+│   └── answers.js             GET/POST  AFTER HACK 회고 답변 조회/등록
+│                               (암호 없이 누구나 씀 — 익명 참가자 제출용,
+│                               나머지 콘텐츠 API와 위협 모델이 다름)
 │
 ├── public/
 │   ├── kw-logo.png            파비콘
@@ -515,6 +526,7 @@ ESLint는 `pnpm lint`. 규칙은 기본 recommended + react-hooks + react-refres
 │   │   ├── projectApi.js      registerProject
 │   │   └── uploadImage.js     리사이즈 후 업로드
 │   ├── assets/                번들에 들어가는 정적 이미지·폰트
+│   │   └── afterhack/         AFTER HACK 배경 이미지 (webp)
 │   ├── components/
 │   │   ├── Header.jsx         고정 상단 네비 (데스크탑 + 모바일 드롭다운)
 │   │   ├── Footer.jsx         저작권, 메일, 인스타
@@ -522,7 +534,9 @@ ESLint는 `pnpm lint`. 규칙은 기본 recommended + react-hooks + react-refres
 │   │   ├── ImageCarousel.jsx  프로젝트 상세 모달의 사진 슬라이드
 │   │   ├── ProjectDetailModal.jsx
 │   │   ├── ProjectFormModal.jsx     운영진용 프로젝트 등록 폼
-│   │   └── MagazineEditorModal.jsx  운영진용 매거진 편집기
+│   │   ├── MagazineEditorModal.jsx  운영진용 매거진 편집기
+│   │   └── afterhack/          AFTER HACK 전용 컴포넌트 (Brand, StickyNote,
+│   │                            AnswerFormDialog, CurtainProvider 등)
 │   ├── data/
 │   │   ├── generations.js           기수 단일 출처. 새 기수는 여기만 고친다
 │   │   ├── curriculumData.js        커리큘럼 본문 (3개 트랙)
@@ -530,9 +544,14 @@ ESLint는 `pnpm lint`. 규칙은 기본 recommended + react-hooks + react-refres
 │   │   ├── projectImages.js         프로젝트 이미지 import + srcSet 조립
 │   │   ├── projectImageWidths.json  원본 폭 매니페스트 (스크립트 생성물)
 │   │   ├── registeredProjects.json  화면에서 등록된 프로젝트 (API가 씀)
-│   │   └── magazines.json           활동 매거진 (API가 씀)
+│   │   ├── magazines.json           활동 매거진 (API가 씀)
+│   │   └── answers.json             AFTER HACK 회고 답변 (api/answers.js가 씀)
 │   ├── hooks/useProjects.js   정적 + 등록 프로젝트 병합, 낙관적 추가
-│   ├── pages/                 화면 5개
+│   ├── lib/afterhack/          AFTER HACK 순수 로직 (질문/팀 목록, 포스트잇
+│   │                            배치 셔플, prefers-reduced-motion 대기)
+│   ├── pages/                 화면 5개 + afterhack/ (온보딩·작성·칠판 3개)
+│   ├── styles/afterhack.css   AFTER HACK 전용 스타일. `.after-hack` 클래스
+│   │                          아래로 전부 스코핑되어 있다 (9.10 참고)
 │   ├── utils/
 │   │   ├── fonts.js           로컬 폰트 @font-face 주입
 │   │   ├── imageResize.js     업로드 전 canvas 리사이즈
@@ -541,7 +560,7 @@ ESLint는 `pnpm lint`. 규칙은 기본 recommended + react-hooks + react-refres
 │   │   ├── magazineBlocks.js  매거진 행/열 조작 순수 함수
 │   │   └── markdown.jsx       자체 마크다운 렌더러
 │   ├── App.jsx                라우팅
-│   ├── main.jsx               진입점
+│   ├── main.jsx                진입점
 │   └── index.css              Tailwind + 전역 스타일
 │
 ├── vercel.json                SPA 폴백, 캐시 헤더
@@ -977,6 +996,28 @@ smoothScrollTo(element, { offset: -80 })   // offset은 고정 헤더를 피하�
 
 > `/projects`의 UP 버튼과 `?id=` 딥링크가 이것 때문에 둘 다 동작하지 않았습니다
 > (2026-09-01 수정).
+
+### 9.10 AFTER HACK 스타일은 스코핑되어 있습니다 — 전역 셀렉터를 다시 넣지 마세요
+
+`src/styles/afterhack.css`는 원래 별도 Next.js 저장소(`kwu-likelion-hack-review`)의
+`globals.css`를 그대로 가져온 게 아닙니다. 원본은 `:root`, `body`, `*`, `a`,
+`button`, `dialog` 같은 **전역 셀렉터**를 썼는데(자기가 유일한 스타일시트라고
+가정하고 짠 코드라서), 그대로 옮기면 사이트 나머지 페이지의 폰트·배경·스크롤까지
+다 덮어씁니다. 그래서 모든 셀렉터를 `.after-hack` 아래로 다시 감쌌고(postcss로
+자동 변환), 폰트 family명(`AfterHackBody`/`AfterHackGaegu`)과 keyframe명
+(`afterhack-descend` 등)도 전역 충돌을 피하려고 접두어를 붙였습니다.
+
+이 파일을 고칠 때:
+- 새 셀렉터는 항상 `.after-hack .foo` 형태로 쓰세요. `:root`나 `body`에 직접
+  쓰면 사이트 전체가 깨집니다.
+- `AfterHackLayout.jsx`가 `<div className="after-hack">`으로 감싸고 그 안에서
+  `CurtainProvider`(`#curtain` 포함) + `<Outlet/>`을 렌더링합니다. `#curtain`
+  셀렉터가 매치하려면 이 div 밖으로 나가면 안 됩니다.
+- `app/board/layout.js`(원본 Next.js 쪽에만 있던 파일)가 칠판 페이지를
+  `<section className="session">`으로 한 번 더 감싸고 있었습니다. 이 래퍼를
+  놓치면 칠판 배경·글자색이 통째로 안 나옵니다 — 이주 중 실제로 한 번
+  겪었던 버그입니다. `Board.jsx`의 `<section className="session">`을 지우지
+  마세요.
 
 ---
 
