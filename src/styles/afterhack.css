@@ -1,0 +1,920 @@
+@font-face {
+  font-family: "AfterHackBody";
+  src: url("/fonts/afterhack/body.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "AfterHackGaegu";
+  src: url("/fonts/afterhack/handwriting.ttf") format("truetype");
+  font-display: swap;
+}
+
+.after-hack {
+  --font-body: "AfterHackBody";
+  --font-handwriting: "AfterHackGaegu";
+  --orange: #ff6000;
+  --paper: #f9f9f9;
+  --ink: #1c1c1c;
+  --yellow: #ffe066;
+  --team0: #ffe066;
+  --team1: #ffba8f;
+  --team2: #c9d9ff;
+  --team3: #d5edb4;
+  --onboarding-image: url("../assets/afterhack/onboarding-bg.webp");
+  --session-image: url("../assets/afterhack/board-bg.webp");
+}
+
+.after-hack {
+  height: 100%;
+}
+
+.after-hack, .after-hack * {
+  box-sizing: border-box;
+}
+.after-hack {
+  margin: 0;
+  background: var(--ink);
+  color: var(--ink);
+  font-family: var(--font-body), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+.after-hack button, .after-hack input, .after-hack textarea, .after-hack select {
+  font: inherit;
+}
+.after-hack button {
+  cursor: pointer;
+}
+.after-hack button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+.after-hack button:focus-visible, .after-hack a:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 6px;
+}
+.after-hack button {
+  border: 0;
+}
+.after-hack button, .after-hack a {
+  touch-action: manipulation;
+}
+.after-hack a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.after-hack .topbar {
+  height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4.5vw;
+  position: relative;
+  z-index: 2;
+}
+.after-hack .brand {
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+  letter-spacing: -1px;
+  font-weight: 900;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.after-hack .brand i {
+  display: block;
+  color: var(--orange);
+  font-size: 32px;
+  font-style: normal;
+}
+.after-hack .brand small {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0;
+  font-weight: 400;
+  border-left: 1px solid #7776;
+  padding-left: 16px;
+  margin-left: 7px;
+}
+.after-hack .outline {
+  border: 1px solid #ffffff50;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  padding: 12px 24px;
+  font-size: 14px;
+}
+.after-hack .pill {
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--ink);
+  padding: 17px 28px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-height: 52px;
+}
+.after-hack .pill span {
+  font-size: 22px;
+  line-height: 1;
+}
+.after-hack .muted {
+  color: #777;
+}
+
+/* 온보딩 */
+.after-hack .intro {
+  min-height: 100svh;
+  color: var(--paper);
+  position: relative;
+  background: var(--onboarding-image),
+    radial-gradient(ellipse at 65% 30%, #57402d, transparent 65%),
+    linear-gradient(135deg, #303030, #171717);
+  background-size: cover;
+  background-position: right center;
+  overflow: hidden;
+}
+.after-hack .intro:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #1c1c1c8c;
+  pointer-events: none;
+}
+.after-hack .intro-main {
+  position: relative;
+  max-width: 1000px;
+  margin: 8vh auto 0;
+  text-align: center;
+  padding: 0 24px 170px;
+}
+.after-hack .eyebrow {
+  font: 12px Arial;
+  letter-spacing: 3px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.after-hack .intro .eyebrow {
+  color: var(--yellow);
+  margin-bottom: 28px;
+}
+.after-hack .intro h1 {
+  font-size: clamp(46px, 5.2vw, 80px);
+  line-height: 1.25;
+  letter-spacing: -3px;
+  margin: 0;
+  font-weight: 800;
+}
+.after-hack .intro h1 em {
+  color: var(--orange);
+  font-style: normal;
+}
+.after-hack .intro .hand {
+  font-family: var(--font-handwriting);
+  font-size: 32px;
+  color: #efe5cf;
+  transform: rotate(-4deg);
+  display: inline-block;
+  margin: 22px 0 28px;
+}
+.after-hack .intro .pill {
+  min-width: 185px;
+}
+.after-hack .intro-bottom {
+  position: absolute;
+  bottom: 35px;
+  left: 4.5vw;
+  right: 4.5vw;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ffffff26;
+  padding-top: 22px;
+  font-size: 13px;
+  color: #cecece;
+}
+.after-hack .intro-bottom strong {
+  color: var(--paper);
+  font-weight: 400;
+}
+.after-hack .floating-note {
+  position: absolute;
+  width: 150px;
+  height: 146px;
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 26px 18px;
+  font-family: var(--font-handwriting);
+  font-size: 25px;
+  box-shadow: 0 12px 35px #0003;
+  line-height: 1.1;
+}
+.after-hack .floating-note.one {
+  left: -2%;
+  top: 41%;
+  transform: rotate(-13deg);
+}
+.after-hack .floating-note.two {
+  right: -2%;
+  top: 58%;
+  transform: rotate(12deg);
+  background: var(--team1);
+}
+
+/* 작성 페이지 */
+.after-hack .compose {
+  background: var(--paper);
+  min-height: 100svh;
+}
+.after-hack .compose .outline {
+  border-color: #ddd;
+}
+.after-hack .compose main {
+  max-width: 1136px;
+  margin: 34px auto 0;
+  padding: 0 28px 50px;
+}
+.after-hack .compose .eyebrow {
+  color: #b54200;
+}
+.after-hack .compose h1 {
+  font-size: 42px;
+  letter-spacing: -1.8px;
+  margin: 13px 0;
+}
+.after-hack .lead {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #6a6a6a;
+}
+.after-hack .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 38px 0 26px;
+}
+.after-hack .qcard {
+  background: white;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  text-align: left;
+  padding: 26px 28px;
+  min-height: 235px;
+  transition: transform 0.2s, border-color 0.2s;
+  position: relative;
+}
+.after-hack .qcard:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+}
+.after-hack .qcard .number {
+  font-family: Arial;
+  font-size: 13px;
+  color: #a03c00;
+  letter-spacing: 1px;
+}
+.after-hack .qcard h2 {
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  margin: 20px 0 12px;
+}
+.after-hack .qcard p {
+  color: #666;
+  line-height: 1.8;
+  font-size: 14px;
+  padding-right: 30px;
+  margin: 0;
+}
+.after-hack .circle-arrow {
+  position: absolute;
+  right: 25px;
+  top: 24px;
+  border: 1px solid #ddd;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+.after-hack .compose-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+.after-hack .textbutton {
+  background: none;
+  color: inherit;
+  font-size: 14px;
+  padding: 10px 0;
+}
+.after-hack .textbutton:hover {
+  color: var(--orange);
+}
+
+/* 회고 칠판 */
+.after-hack .session {
+  min-height: 100svh;
+  color: var(--paper);
+  background: var(--session-image), radial-gradient(ellipse at 50% 0, #595045, #272727 85%);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  isolation: isolate;
+}
+.after-hack .session:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #1c1c1cb8;
+  z-index: -1;
+  pointer-events: none;
+}
+.after-hack .session .topbar {
+  height: 82px;
+}
+.after-hack .stepbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.after-hack .step {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: #a8a8a8;
+  border: 1px solid #666;
+  font: 18px Arial;
+}
+.after-hack .step.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--ink);
+  font-weight: bold;
+}
+.after-hack .stepbar > span {
+  height: 1px;
+  width: 15px;
+  background: #555;
+}
+.after-hack .board {
+  max-width: 1800px;
+  width: 80vw;
+  min-height: calc(100svh - 260px);
+  margin: 12px auto 0;
+  padding: 28px 40px 32px;
+  background: radial-gradient(ellipse at 10% 0, #41474160, transparent 70%), #282e2b;
+  border: 8px solid #665549;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px #8a7361, 0 18px 50px #0006, inset 0 0 55px #0003;
+  position: relative;
+  transform-origin: top center;
+  display: flex;
+  flex-direction: column;
+}
+.after-hack .board:after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: -13px;
+  right: -13px;
+  height: 10px;
+  border-radius: 3px;
+  background: #7b6652;
+  box-shadow: 0 6px 10px #0006;
+}
+.after-hack .board-head {
+  position: relative;
+  text-align: center;
+  padding: 0 24px 20px;
+  border-bottom: 1px solid #d7e2d328;
+}
+.after-hack .board-label {
+  font: 12px Arial;
+  letter-spacing: 2px;
+  color: #e6d5a2;
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+.after-hack .board h1 {
+  font-family: var(--font-handwriting);
+  font-weight: 400;
+  letter-spacing: -1px;
+  font-size: 42px;
+  line-height: 1.2;
+  margin: 3px 0 14px;
+  color: #f5f1e5;
+}
+.after-hack .board h1 em {
+  font-style: normal;
+  color: var(--yellow);
+}
+.after-hack .board-head p {
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 0 auto;
+  max-width: 880px;
+  color: #d7dcd5;
+  word-break: keep-all;
+}
+.after-hack .notes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-content: start;
+  gap: 28px 32px;
+  padding: 30px 12px 16px;
+  align-items: start;
+  flex: 1 1 auto;
+}
+.after-hack .board-add {
+  text-align: center;
+  padding-top: 20px;
+}
+.after-hack .note {
+  background: var(--note-color);
+  color: var(--ink);
+  width: 100%;
+  max-width: 160px;
+  margin-inline: auto;
+  min-height: 88px;
+  padding: 12px 10px 10px;
+  box-shadow: 3px 8px 12px #0003;
+  border-radius: 1px 1px 7px 1px;
+  transform: translateY(var(--dy, 0px)) rotate(var(--rot, 0deg));
+  text-align: left;
+  font-family: var(--font-handwriting);
+  font-size: 13px;
+  line-height: 1.23;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow-wrap: anywhere;
+}
+.after-hack .note:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: #fff3;
+  border-radius: 6px 0 6px 0;
+}
+.after-hack .note:hover, .after-hack .note:focus-visible {
+  transform: translateY(-5px) rotate(0deg);
+  box-shadow: 3px 13px 18px #0005;
+}
+.after-hack .note .clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-line;
+}
+.after-hack .session-footer {
+  max-width: 1800px;
+  width: 80vw;
+  margin: 29px auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26px;
+  gap: 24px;
+}
+.after-hack .legend {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #ddd;
+}
+.after-hack .legend span {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.after-hack .legend b {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+.after-hack .footer-actions {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.after-hack .footer-actions .pill {
+  padding: 13px 25px;
+  font-size: 14px;
+}
+.after-hack .hint {
+  text-align: center;
+  color: #a8aaa7;
+  font-size: 12px;
+  margin: 0 0 10px;
+}
+.after-hack .board-enter {
+  animation: afterhack-descend 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.after-hack .board-exit {
+  animation: afterhack-ascend 0.55s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+@keyframes afterhack-descend {
+  from {
+    transform: translateY(-110vh);
+    opacity: 0.3;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes afterhack-ascend {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+.after-hack #curtain {
+  position: fixed;
+  inset: 0;
+  background: #0b0b0b;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.55s;
+}
+.after-hack #curtain.closed {
+  opacity: 1;
+}
+
+/* 상태 표시 (로딩/빈/오류) */
+.after-hack .state-msg {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 70px 10px;
+  color: #e3e8df;
+}
+.after-hack .state-msg p {
+  font-family: var(--font-handwriting);
+  font-size: 30px;
+  margin: 0 0 18px;
+}
+.after-hack .empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 70px 10px;
+  color: #e3e8df;
+}
+.after-hack .empty p {
+  font-family: var(--font-handwriting);
+  font-size: 30px;
+}
+
+/* 모달 */
+.after-hack dialog {
+  border: 0;
+  border-radius: 22px;
+  padding: 0;
+  max-width: calc(100% - 32px);
+  width: 560px;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 0 28px 100px #0005;
+}
+.after-hack dialog::backdrop {
+  background: #101010bf;
+  backdrop-filter: blur(5px);
+}
+.after-hack dialog[open] {
+  animation: afterhack-modal-in 0.25s ease-out;
+}
+@keyframes afterhack-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.after-hack .modal-inner {
+  padding: 34px 36px;
+  max-height: 85svh;
+  overflow: auto;
+}
+.after-hack .modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 12px Arial;
+  letter-spacing: 2px;
+  color: #aa4000;
+}
+.after-hack .close {
+  background: none;
+  font: 26px Arial;
+  color: inherit;
+  padding: 4px 8px;
+  min-width: 38px;
+  min-height: 38px;
+}
+.after-hack .modal-inner h2 {
+  font-size: 27px;
+  letter-spacing: -1px;
+  margin: 15px 0 14px;
+}
+.after-hack .modal-question {
+  font-size: 14px;
+  color: #6b6b6b;
+  line-height: 1.9;
+  margin: 0 0 26px;
+  word-break: keep-all;
+}
+.after-hack label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+.after-hack select, .after-hack textarea {
+  display: block;
+  width: 100%;
+  background: white;
+  color: var(--ink);
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  padding: 14px;
+  outline: none;
+}
+.after-hack select:focus, .after-hack textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px #ff600019;
+}
+.after-hack textarea {
+  resize: vertical;
+  min-height: 155px;
+  line-height: 1.7;
+  font-size: 15px;
+}
+.after-hack .field-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #767676;
+  margin: 9px 0 24px;
+}
+.after-hack .save {
+  width: 100%;
+  border-radius: 10px;
+}
+.after-hack .error {
+  font-size: 14px;
+  color: #b22813;
+}
+.after-hack .detail {
+  background: transparent;
+  box-shadow: none;
+  width: 550px;
+  overflow: visible;
+  border-radius: 0;
+}
+.after-hack .detail .close {
+  color: white;
+  position: absolute;
+  top: -46px;
+  right: 0;
+}
+.after-hack .large-note {
+  background: var(--note-color);
+  padding: 52px 44px;
+  border-radius: 2px 2px 25px 2px;
+  box-shadow: 0 20px 70px #0005;
+  min-height: 330px;
+  max-height: 75svh;
+  overflow: auto;
+  font-family: var(--font-handwriting);
+  font-size: 36px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.after-hack .toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1c1c1c;
+  color: #fff;
+  padding: 15px 24px;
+  border: 1px solid #ffffff33;
+  border-radius: 12px;
+  z-index: 80;
+  box-shadow: 0 5px 20px #0002;
+  font-size: 14px;
+  max-width: 90vw;
+}
+
+@media (min-width: 1500px) {
+  .after-hack .intro-main {
+    margin-top: 12vh;
+  }
+  .after-hack .board {
+    margin-top: 28px;
+  }
+  .after-hack .notes {
+    gap: 34px 42px;
+  }
+  .after-hack .note {
+    min-height: 100px;
+    font-size: 14px;
+  }
+  .after-hack .session-footer {
+    margin-top: 36px;
+  }
+}
+@media (max-width: 900px) {
+  .after-hack .brand small {
+    display: none;
+  }
+  .after-hack .board {
+    width: 92%;
+    padding: 24px 22px;
+  }
+  .after-hack .board-label {
+    position: static;
+    margin-bottom: 12px;
+  }
+  .after-hack .board h1 {
+    font-size: 35px;
+  }
+  .after-hack .notes {
+    gap: 24px 22px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-inline: 2px;
+  }
+  .after-hack .note {
+    font-size: 12px;
+  }
+  .after-hack .session-footer {
+    width: 92%;
+    align-items: flex-start;
+  }
+  .after-hack .legend {
+    gap: 12px;
+  }
+  .after-hack .footer-actions {
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .after-hack .floating-note {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .after-hack .topbar {
+    height: 76px;
+    padding: 0 22px;
+  }
+  .after-hack .brand {
+    font-size: 18px;
+    gap: 7px;
+  }
+  .after-hack .brand i {
+    font-size: 27px;
+  }
+  .after-hack .outline {
+    font-size: 13px;
+    padding: 10px 18px;
+  }
+  .after-hack .intro-main {
+    margin-top: 16vh;
+    padding-bottom: 170px;
+  }
+  .after-hack .intro h1 {
+    font-size: 30px;
+    letter-spacing: -1.5px;
+  }
+  .after-hack .intro .hand {
+    font-size: 25px;
+  }
+  .after-hack .intro-bottom {
+    font-size: 11px;
+    gap: 16px;
+    line-height: 1.8;
+  }
+  .after-hack .compose main {
+    margin-top: 22px;
+    padding: 0 22px 44px;
+  }
+  .after-hack .compose h1 {
+    font-size: 32px;
+  }
+  .after-hack .cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 25px;
+  }
+  .after-hack .qcard {
+    min-height: 220px;
+    padding: 23px;
+  }
+  .after-hack .qcard h2 {
+    font-size: 23px;
+  }
+  .after-hack .compose-foot {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .after-hack .session .topbar {
+    padding: 0 16px;
+    height: 78px;
+  }
+  .after-hack .session .brand {
+    font-size: 15px;
+  }
+  .after-hack .stepbar {
+    gap: 5px;
+  }
+  .after-hack .stepbar > span {
+    width: 5px;
+  }
+  .after-hack .step {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+  .after-hack .board {
+    width: 94%;
+    padding: 22px 12px;
+    border-width: 5px;
+  }
+  .after-hack .board-head {
+    padding: 0 5px 18px;
+  }
+  .after-hack .board h1 {
+    font-size: 31px;
+  }
+  .after-hack .board-head p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .after-hack .notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+    padding: 26px 7px 12px;
+  }
+  .after-hack .note {
+    font-size: 11px;
+    padding: 10px 7px;
+    min-height: 89px;
+  }
+  .after-hack .session-footer {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 25px;
+  }
+  .after-hack .legend {
+    font-size: 12px;
+    gap: 13px;
+  }
+  .after-hack .footer-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .after-hack .modal-inner {
+    padding: 24px;
+  }
+  .after-hack .modal-inner h2 {
+    font-size: 23px;
+  }
+  .after-hack .large-note {
+    padding: 35px 28px;
+    font-size: 30px;
+  }
+  .after-hack .hint {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 340px) {
+  .after-hack .intro h1 {
+    font-size: 25px;
+    letter-spacing: -1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .after-hack, .after-hack *, .after-hack *:before, .after-hack *:after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

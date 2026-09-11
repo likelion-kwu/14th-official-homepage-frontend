@@ -9,6 +9,11 @@ const Curriculum = lazy(() => import('./pages/Curriculum'))
 const Activities = lazy(() => import('./pages/Activities'))
 const Projects = lazy(() => import('./pages/Projects'))
 
+const AfterHackLayout = lazy(() => import('./components/afterhack/AfterHackLayout'))
+const AfterHackOnboarding = lazy(() => import('./pages/afterhack/Onboarding'))
+const AfterHackWrite = lazy(() => import('./pages/afterhack/Write'))
+const AfterHackBoard = lazy(() => import('./pages/afterhack/Board'))
+
 function ScrollToTop() {
   const { pathname } = useLocation()
 
@@ -34,6 +39,13 @@ export default function App() {
 
           {/* 프로젝트 리스트 */}
           <Route path='/projects' element={<Projects />} />
+
+          {/* 14기 중앙해커톤 회고 (AFTER HACK) */}
+          <Route path='/activities/14th-hackathon' element={<AfterHackLayout />}>
+            <Route index element={<AfterHackOnboarding />} />
+            <Route path='write' element={<AfterHackWrite />} />
+            <Route path='board/:qid' element={<AfterHackBoard />} />
+          </Route>
 
           {/* 옛 프로젝트 홈. 북마크와 외부 링크가 살아 있어 리다이렉트만 남긴다 */}
           <Route path='/projectshome' element={<Navigate to='/projects' replace />} />
