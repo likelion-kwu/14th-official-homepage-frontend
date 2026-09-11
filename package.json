@@ -1,7 +1,7 @@
 {
   "name": "likelion14th_homepage",
   "private": true,
-  "version": "1.2.0",
+  "version": "14.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
